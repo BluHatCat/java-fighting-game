@@ -28,8 +28,19 @@ public class FighterManager {
 	 * @param name
 	 * @param fclass
 	 */
-	public void addFighter(String name, FighterTypes fclass) {
+	public void addFighter(Scanner s) {
+		MenuUi.newFighterInit();
+		String name = s.nextLine();
+		MenuUi.classesInit();
+		Util.classList();
+		MenuUi.classesChPr();
+		FighterTypes fclass = Util.toClass(Util.inputInBounds(s, 1, Util.numTypes())-1);
 		fighters.add(fclass.create(name));
+		MenuUi.waiting();
+		Util.sleep(0);
+		MenuUi.newFighterDone(name, fclass.name());
+		MenuUi.space();
+		Util.sleep(0);
 	}
 	
 	public FightPair fighterChoice(Scanner s) {
@@ -38,10 +49,10 @@ public class FighterManager {
 			MenuUi.fighterChoiceList(i, getFighter(i).getName(), getFighter(i).getWins() );
 		}
 		MenuUi.fighterCh1Pr();
-		int index1 = Util.check(s.nextLine())-1;
+		int index1 = Util.inputInBounds(s, 1, numFighters())-1;
 		MenuUi.fighterCh1(getFighter(index1).getName());
 		MenuUi.fighterCh2Pr();
-		int index2 = Util.check(s.nextLine())-1;
+		int index2 = Util.inputInBounds(s, 1, numFighters())-1;
 		MenuUi.fighterCh2(getFighter(index2).getName());
 		FightPair pair = new FightPair(getFighter(index1), getFighter(index2));
 		return pair;

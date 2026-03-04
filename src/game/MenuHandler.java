@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import arena.FightPair;
 import arena.FighterManager;
-import characters.FighterTypes;
 import ui.CombatUI;
 import ui.MenuUi;
 
@@ -28,19 +27,9 @@ private FighterManager arena;
 	
 	public boolean action(int action, Scanner s) {
 		switch (action){
-		case 1 -> 	{MenuUi.newFighterInit();
-					String name = s.nextLine();
-					MenuUi.classesInit();
-					classList();
-					MenuUi.classesChPr();
-					FighterTypes fclass = Util.toClass(Util.check(s.nextLine())-1);
-					arena.addFighter(name, fclass);
-					MenuUi.waiting();
-					Util.sleep(0);
-					MenuUi.newFighterDone(name, fclass.name());
-					MenuUi.space();
-					Util.sleep(0);
-					return true;}
+		case 1 -> {
+			arena.addFighter(s);
+			return true;}
 		case 2 -> {
 			if(arena.numFighters()<2) {
 				MenuUi.missingFighters();
@@ -52,17 +41,18 @@ private FighterManager arena;
 				CombatUI.result(winner);
 				Util.enterToCon(s);}
 			return true;}
-		case 3 -> {arena.ranking(); return true;}
-		case 4 -> {return false;}
-		default -> {MenuUi.error(); return true;}
+		case 3 -> {
+			arena.ranking(); 
+			return true;}
+		case 4 -> {
+			return false;}
+		default -> {
+			MenuUi.error(); 
+			return true;}
 		}
 	}
 	
 
-	private static void classList() {
-		for(FighterTypes type : FighterTypes.values()) {
-			MenuUi.classesList(type.ordinal()+1, type.name(), type.description());
-		}
-	}
+	
 
 }
