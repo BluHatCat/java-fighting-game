@@ -56,14 +56,6 @@ public class Util {
 		}
 	}
 	
-	public static int numTypes() {
-		int i = 0;
-		for(FighterTypes type : FighterTypes.values()) {
-			i++;
-		}
-		return i;
-	}
-	
 	public static void classList() {
 		for(FighterTypes type : FighterTypes.values()) {
 			MenuUi.classesList(type.ordinal()+1, type.name(), type.description());

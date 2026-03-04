@@ -10,17 +10,20 @@ public class Fighter {
 		private int health;
 		private int maxHealth;
 		private int attack;
+		private int defense;
 		private double critChance;
+		//private double dodgeRate;
 		private int speed;
 		private int initiative;
 		private int wins;
 
 		
 	//Constructors
-		public Fighter(String name, int health, int attack, double critChance, int speed) {
+		public Fighter(String name, int health, int attack, int defense, double critChance, int speed) {
 			this.name = name;
 			this.maxHealth = this.health = health;
 			this.attack = attack;
+			this.defense = defense;
 			this.critChance = critChance;
 			this.speed = speed;
 			initiative = 0;
@@ -28,7 +31,7 @@ public class Fighter {
 		}
 		
 		public Fighter(String name) {
-			this(name, 100, 10, 0.1, 10);
+			this(name, 0, 0, 0, 0, 0);
 		}
 	//**********	
 
@@ -36,8 +39,8 @@ public class Fighter {
 	//Attack pattern	
 		public DmgTypes attack(Fighter opponent) {
 			loseIni(0);
-			int dmg = (int) (Math.random()*attack);
-			if(dmg == 0) {
+			int dmg = (int) (Math.random()*attack) + attack;
+			if(dmg < opponent.getDefense()) {
 				return DmgTypes.MISSED;
 			} else {
 				opponent.takeDamage(dmg);
@@ -110,6 +113,10 @@ public class Fighter {
 		
 		public int getMaxHealth() {
 			return maxHealth;
+		}
+		
+		public int getDefense() {
+			return defense;
 		}
 
 }

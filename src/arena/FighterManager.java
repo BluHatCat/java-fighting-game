@@ -34,7 +34,7 @@ public class FighterManager {
 		MenuUi.classesInit();
 		Util.classList();
 		MenuUi.classesChPr();
-		FighterTypes fclass = Util.toClass(Util.inputInBounds(s, 1, Util.numTypes())-1);
+		FighterTypes fclass = Util.toClass(Util.inputInBounds(s, 1, FighterTypes.values().length)-1);
 		fighters.add(fclass.create(name));
 		MenuUi.waiting();
 		Util.sleep(0);
