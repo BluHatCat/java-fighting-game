@@ -5,6 +5,6 @@ package characters;
  */
 public class Assassin extends Fighter {
 	public Assassin(String name) {
-		super(name, 50, 10, 0.4, 15);
+		super(name, 50, 10, 5, 0.5, 15);
 	}
 }

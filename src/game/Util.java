@@ -31,6 +31,22 @@ public class Util {
 			}
 	}
 	
+	public static int inputInBounds(Scanner s, int min, int max) {
+		int num;
+		boolean ok = true;
+		do {
+			num = Util.check(s.nextLine());
+			if(num<min || num> max) {
+				MenuUi.error();
+				ok=false;
+			} else {
+				ok = true;
+			}
+		}while(ok==false);
+		return num;
+	}
+	
+	
 	public static FighterTypes toClass(int number) {
 		try {
 			return FighterTypes.values()[number];
@@ -39,5 +55,10 @@ public class Util {
 			return null;
 		}
 	}
-
+	
+	public static void classList() {
+		for(FighterTypes type : FighterTypes.values()) {
+			MenuUi.classesList(type.ordinal()+1, type.name(), type.description());
+		}
+	}
 }
