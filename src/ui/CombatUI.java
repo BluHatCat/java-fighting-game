@@ -17,6 +17,10 @@ public class CombatUI {
 	public static void critical(String opponentName) {
 		System.out.println(Visuals.paint(Colours.RED, "CRITICAL HIT! " + opponentName + " took double damage!"));
 	}
+	
+	public static void dodged(String opponent) {
+		System.out.println(Visuals.paint(Colours.GREEN, "Woah, did you see that? " + opponent + " just dodged the attack!"));
+	}
 		
 	public static void parry() {
 		System.out.println(Visuals.paint(Colours.GREEN, "UNBELIEVABLE! Both fighters attacked at the same time; they PARRIED each other's attacks!"));

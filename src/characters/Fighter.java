@@ -12,26 +12,29 @@ public class Fighter {
 		private int attack;
 		private int defense;
 		private double critChance;
-		//private double dodgeRate;
+		private double dodgeRate;
+		private double accuracy;
 		private int speed;
 		private int initiative;
 		private int wins;
 
 		
 	//Constructors
-		public Fighter(String name, int health, int attack, int defense, double critChance, int speed) {
+		public Fighter(String name, int health, int attack, int defense, double critChance, double dodgeRate, double accuracy, int speed) {
 			this.name = name;
 			this.maxHealth = this.health = health;
 			this.attack = attack;
 			this.defense = defense;
 			this.critChance = critChance;
+			this.dodgeRate = dodgeRate;
+			this.accuracy = accuracy;
 			this.speed = speed;
 			initiative = 0;
 			wins = 0;	
 		}
 		
 		public Fighter(String name) {
-			this(name, 0, 0, 0, 0, 0);
+			this(name, 0, 0, 0, 0, 0, 0, 0);
 		}
 	//**********	
 
@@ -39,6 +42,9 @@ public class Fighter {
 	//Attack pattern	
 		public DmgTypes attack(Fighter opponent) {
 			loseIni(0);
+			if(Math.random()*accuracy < opponent.getDodge()) {
+				return DmgTypes.DODGED;
+			}
 			int dmg = (int) (Math.random()*attack) + attack;
 			if(dmg < opponent.getDefense()) {
 				return DmgTypes.MISSED;
@@ -117,6 +123,10 @@ public class Fighter {
 		
 		public int getDefense() {
 			return defense;
+		}
+		
+		public double getDodge() {
+			return dodgeRate;
 		}
 
 }

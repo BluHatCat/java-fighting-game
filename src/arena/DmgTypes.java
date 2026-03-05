@@ -6,6 +6,7 @@ package arena;
  */
 public enum DmgTypes {
 	MISSED,
+	DODGED,
 	NORMAL,
 	CRIT;
 }

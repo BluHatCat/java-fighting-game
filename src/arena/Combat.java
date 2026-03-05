@@ -31,7 +31,8 @@ private FighterManager m;
 		
 		
 		startIni(f1, f2);
-		
+		System.out.println(f1.getInitiative());
+		System.out.println(f2.getInitiative());
 		//The main fighting loop, ends if one fighter is not alive
 		while(f1.isAlive() && f2.isAlive()) {
 			fightTick(s, f1, f2);
@@ -67,9 +68,10 @@ private FighterManager m;
 		f1.gainIni(0);
 		f2.gainIni(0);
 		
-		while(f1.canAttack() || f2.canAttack()) {
-			fightRound(s, f1, f2);
-		}
+		fightRound(s, f1, f2);
+		
+		System.out.println(f1.getName() + ": " + f1.getInitiative());
+		System.out.println(f2.getName() + ": " + f2.getInitiative());
 	}
 	
 	/**
@@ -81,7 +83,7 @@ private FighterManager m;
 	 */
 	private void fightRound(Scanner s, Fighter f1, Fighter f2) {
 		boolean running = true;
-		while(running) {
+		while(running && (f1.canAttack() || f2.canAttack())) {
 			if(f1.getInitiative()>f2.getInitiative()) { //one with the highest init starts
 				fightAttack(f1, f2);
 				if(! f2.isAlive()) { //if attacked player dies, the fight loop ends (also the outer one in conclusion)
@@ -110,13 +112,16 @@ private FighterManager m;
 	 * @param f2
 	 */
 	private void fightAttack(Fighter f1, Fighter f2) {
+		System.out.println(f1.getName() + " is attacking");
 		int healthA =  f2.getHealth();
 		DmgTypes type = f1.attack(f2);
 		if(type == DmgTypes.MISSED) {
 			CombatUI.missed(f1.getName(), f2.getName());
 		} else if(type == DmgTypes.CRIT) {
-			CombatUI.damage(f1.getName(), healthA-(f2.getHealth()/2), f2.getName());
+			CombatUI.damage(f1.getName(), (healthA-(f2.getHealth()))/2, f2.getName());
 			CombatUI.critical(f2.getName());
+		} else if(type == DmgTypes.DODGED) {
+			CombatUI.dodged(f2.getName());
 		} else {
 			CombatUI.damage(f1.getName(), healthA-f2.getHealth(), f2.getName());
 		}
