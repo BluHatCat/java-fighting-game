@@ -17,7 +17,7 @@ private FighterManager arena;
 		arena = new FighterManager();
 	}
 	
-	public static String menu(Scanner s) {
+	public String menu(Scanner s) {
 		MenuUi.showMenu();
 		String choice = s.nextLine();
 		Util.sleep(0);
@@ -25,10 +25,14 @@ private FighterManager arena;
 		return choice;
 	}
 	
-	public boolean action(int action, Scanner s) {
+	public boolean menuAction(int action, Scanner s) {
 		switch (action){
 		case 1 -> {
-			arena.addFighter(s);
+			boolean notDone = true;
+			do {
+				int choice = Util.check(fighterMenu(s));
+				notDone = fighterAction(choice, s);
+			} while(notDone == true);
 			return true;}
 		case 2 -> {
 			if(arena.numFighters()<2) {
@@ -42,7 +46,35 @@ private FighterManager arena;
 				Util.enterToCon(s);}
 			return true;}
 		case 3 -> {
-			arena.ranking(); 
+			MenuUi.adios();
+			Util.enterToCon(s);
+			return false;}
+		default -> {
+			MenuUi.error(); 
+			return true;}
+		}
+	}
+	
+	private static String fighterMenu(Scanner s) {
+		MenuUi.showCharMenu();
+		String choice = s.nextLine();
+		Util.sleep(0);
+		MenuUi.space();
+		return choice;
+	}
+
+	private boolean fighterAction(int action, Scanner s) {
+		switch (action){
+		case 1 -> {
+			arena.addFighter(s);
+			return true;}
+		case 2 -> {
+			arena.ranking();
+			Util.enterToCon(s);
+			MenuUi.space();
+			return true;}
+		case 3 -> {
+			arena.editFighter(s);
 			return true;}
 		case 4 -> {
 			return false;}
@@ -52,7 +84,6 @@ private FighterManager arena;
 		}
 	}
 	
-
 	
 
 }

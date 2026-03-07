@@ -1,5 +1,6 @@
 package arena;
 
+import java.awt.Menu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -46,7 +47,7 @@ public class FighterManager {
 	public FightPair fighterChoice(Scanner s) {
 		MenuUi.fighterChoiceInit();
 		for(int i= 0; i<numFighters(); i++) {
-			MenuUi.fighterChoiceList(i, getFighter(i).getName(), getFighter(i).getWins() );
+			MenuUi.fighterList(i, getFighter(i), false);
 		}
 		MenuUi.fighterCh1Pr();
 		int index1 = Util.inputInBounds(s, 1, numFighters())-1;
@@ -56,6 +57,20 @@ public class FighterManager {
 		MenuUi.fighterCh2(getFighter(index2).getName());
 		FightPair pair = new FightPair(getFighter(index1), getFighter(index2));
 		return pair;
+	}
+	
+	public void editFighter(Scanner s) {
+		MenuUi.editFighterPr();
+		for(int i = 0; i<numFighters(); i++) {
+			MenuUi.fighterList(i, getFighter(i), false);
+			MenuUi.enterNum();
+			int index = Util.inputInBounds(s, 1, numFighters())-1;
+			MenuUi.choiceMade(getFighter(index).getName());
+			MenuUi.editFighterPr2();
+			getFighter(index).setName(s.nextLine());
+			MenuUi.editFighterDone(getFighter(index).getName());
+			MenuUi.space();
+		}
 	}
 
 //Resets a fighter to their innitial health and initiative
@@ -67,10 +82,10 @@ public class FighterManager {
 	
 //ranks the fighters by how many fights they have won
 	public void ranking() {
-		int i = 1;
+		int i = 0;
 		fighters.sort((a,b) -> b.getWins() - a.getWins());
 		for(Fighter fighter : fighters) {
-			MenuUi.ranked(i, fighter.getName(), fighter.getWins());
+			MenuUi.fighterList(i, fighter, true);
 			i++;
 		}
 	}

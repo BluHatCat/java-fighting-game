@@ -13,8 +13,8 @@ public class Main {
 		boolean running = true;
 		
 		while(running) {
-			int choice = Util.check(MenuHandler.menu(s));
-			running = game.action(choice, s);
+			int choice = Util.check(game.menu(s));
+			running = game.menuAction(choice, s);
 		}
 		s.close();
 	}

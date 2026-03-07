@@ -31,8 +31,7 @@ private FighterManager m;
 		
 		
 		startIni(f1, f2);
-		System.out.println(f1.getInitiative());
-		System.out.println(f2.getInitiative());
+
 		//The main fighting loop, ends if one fighter is not alive
 		while(f1.isAlive() && f2.isAlive()) {
 			fightTick(s, f1, f2);
@@ -69,9 +68,6 @@ private FighterManager m;
 		f2.gainIni(0);
 		
 		fightRound(s, f1, f2);
-		
-		System.out.println(f1.getName() + ": " + f1.getInitiative());
-		System.out.println(f2.getName() + ": " + f2.getInitiative());
 	}
 	
 	/**

@@ -7,4 +7,8 @@ public class Assassin extends Fighter {
 	public Assassin(String name) {
 		super(name, 50, 8, 5, 0.5, 0.5, 1, 15);
 	}
+	
+	public String getType() {
+		return "Assassin";
+	}
 }

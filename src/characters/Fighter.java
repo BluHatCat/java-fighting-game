@@ -5,7 +5,7 @@ import arena.DmgTypes;
 /**
  * The base for every fighter-type, cannot be chosen
  */
-public class Fighter {
+public abstract class Fighter {
 		private String name;
 		private int health;
 		private int maxHealth;
@@ -82,6 +82,10 @@ public class Fighter {
 			health = maxHealth;
 			initiative = 0;
 		}
+		
+		public void setName(String name) {
+			this.name = name;
+		}
 	//**********
 
 		
@@ -128,5 +132,7 @@ public class Fighter {
 		public double getDodge() {
 			return dodgeRate;
 		}
+		
+		public abstract String getType();
 
 }
