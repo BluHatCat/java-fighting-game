@@ -7,10 +7,10 @@ It also helps me practice different aspects of java and project management.
 
 ---
 ## ▶️ STATUS
-🚧 WORK IN PROGRESS 🚧
+⏸️ TEMPORARILY PAUSED ⏸️
 
-It is running as intended and core features are implemented
-The structure and code are still evolving
+While I prepare for transitioning into a Computer Science degree, this project is on hold.
+Development will resume in the future.
 
 ---
 
